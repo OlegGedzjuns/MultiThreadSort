@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiThreadSort", "MultiThreadSort\MultiThreadSort.csproj", "{9688E6B8-6BDB-46F6-9CDF-D484E2C4389E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9688E6B8-6BDB-46F6-9CDF-D484E2C4389E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9688E6B8-6BDB-46F6-9CDF-D484E2C4389E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9688E6B8-6BDB-46F6-9CDF-D484E2C4389E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9688E6B8-6BDB-46F6-9CDF-D484E2C4389E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {893255D2-4ADF-4805-9387-8AC29C0F6962}
+	EndGlobalSection
+EndGlobal
