@@ -6,19 +6,31 @@ namespace MultiThreadSort.Data
 {
     class DataBase
     {
-        public int ListCnt;
-        public int ListSize;
-
+        /// <summary>
+        /// The number of lists in the main list
+        /// </summary>
+        public int ListCount { get; set; }
+        /// <summary>
+        /// The number of elements in each list
+        /// </summary>
+        public int ListSize { get; set; }
         public List<List<int>> Data { get; set; }
 
-        public DataBase(int listCnt, int listSize, int randMin, int randMax)
+        /// <summary>
+        /// Creates DataBase and fill list vith random values from RandMin to RandMax
+        /// </summary>
+        /// <param name="listCount">Using to set general list size</param>
+        /// <param name="listSize">Using to set number of elements in each list</param>
+        /// <param name="randMin">Minimal rand value</param>
+        /// <param name="randMax">Maximal rand value</param>
+        public DataBase(int listCount, int listSize, int randMin, int randMax)
         {
-            ListCnt = listCnt;
+            ListCount = listCount;
             ListSize = listSize;
-            Data = new List<List<int>>(ListCnt);
-            for (int i = 0; i < ListCnt; i++)
+            Data = new List<List<int>>(ListCount);
+            Random rand = new Random();
+            for (int i = 0; i < ListCount; i++)
             {
-                Random rand = new Random();
                 List<int> buf = new List<int>(ListSize);
                 for(int j = 0; j < ListSize; j++)
                 {
@@ -30,7 +42,7 @@ namespace MultiThreadSort.Data
 
         public void SingleThreadSort()
         {
-            for(int i = 0; i < ListCnt; i++)
+            for(int i = 0; i < ListCount; i++)
             {
                 Data[i].Sort();
             }
@@ -38,24 +50,20 @@ namespace MultiThreadSort.Data
 
         public void MultiThreadSort()
         {
-            Thread t1 = new Thread(Func);
-            Thread t2 = new Thread(Func);
-            Thread t3 = new Thread(Func);
-            for (int i = 0; i < ListCnt; i += 4)
+            const int threadCount = 4;
+            for(int i = 0; i < threadCount; i++)
             {
-                t1.Start(Data[i]);
-                t2.Start(Data[i + 1]);
-                t3.Start(Data[i + 2]);
-                Data[i + 3].Sort();
-                t1.Join();
-                t2.Join();
-                t3.Join();
+                Thread t = new Thread(SortFunc);
+                t.Start(Data.GetRange(i * (ListCount / threadCount), ListCount / threadCount));
             }
         }
-        void Func(Object dat)
+        void SortFunc(Object dat)
         {
-            List<int> Dat = (List<int>)dat;
-            Dat.Sort();
+            List<List<int>> Dat = (List<List<int>>)dat;
+            foreach(List<int> list in Dat)
+            {
+                list.Sort();
+            }
         }
     }
 }

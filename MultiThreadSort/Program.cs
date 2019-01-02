@@ -12,21 +12,32 @@ namespace MultiThreadSort
     {
         static void Main()
         {
-            var watch = Stopwatch.StartNew();
-            DataBase dat = new DataBase(1000, 1000, 0, 1000000);
-            //DataBase dat2 = new DataBase(10000, 10000, 0, 1000000);
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            Console.WriteLine($"Created in {elapsedMs} ms");
+            const int debugSize = 20000;
 
-            //watch.Restart();
-            //dat.SingleThreadSort();
-            //watch.Stop();
-            //elapsedMs = watch.ElapsedMilliseconds;
-            //Console.WriteLine($"Single thread sort time = {elapsedMs} ms");
+            Console.WriteLine("Creating");
+            DataBase dat1 = new DataBase
+                (listSize: debugSize, 
+                listCount: debugSize, 
+                randMin: 0, 
+                randMax: 1000000);
+            DataBase dat2 = new DataBase
+                (listSize: debugSize,
+                listCount: debugSize,
+                randMin: 0,
+                randMax: 1000000);
+
+            var watch = new Stopwatch();
+            Console.Clear();
+            Console.WriteLine("Sorting");
 
             watch.Restart();
-            dat.MultiThreadSort();
+            dat1.SingleThreadSort();
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            Console.WriteLine($"Single thread sort time = {elapsedMs} ms");
+
+            watch.Restart();
+            dat2.MultiThreadSort();
             watch.Stop();
             elapsedMs = watch.ElapsedMilliseconds;
             Console.WriteLine($"Multi thread sort time = {elapsedMs} ms");
